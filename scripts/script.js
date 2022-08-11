@@ -1,9 +1,10 @@
-console.log('script is connected');
+//console.log('script is connected');//
 
 const gameArea = {
     canvas: document.createElement('canvas'),
     frames: 0,
     stopTinas: [],
+    question: false,
     start: function () {
         this.canvas.width = 600;
         this.canvas.height = 600;
@@ -13,6 +14,12 @@ const gameArea = {
     },
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    score: function () {
+        const points = Math.floor(this.frames / this.question);
+        this.context.font = '14px arial';
+        this.context.fillStyle = 'purple';
+        this.context.fillText(`Score: ${points}, 350, 50`);
     }
 }
 
@@ -37,16 +44,41 @@ class Component {
         this.x += this.speedX;
         this.y += this.speedY;
     }
+
+    top () {
+        return this.y
+    }
+
+    bottom () {
+        return this.y + this.height
+    }
+
+    left () {
+        return this.x
+    }
+
+    right () {
+        return this.x + this.width
+    }
+
+    crashInto(stopTinas) {
+        return ! (
+            this.bottom() < tina.top()
+            || this.top() > tina.bottom()
+            || this.right() < tina.left()
+            || this.left() > tina.right()
+        )
+    }
 }
 
 function stopTina () {
     let x = gameArea.canvas.width
-    let minHeight = 80;
-    let maxHeight = 150;
+    let minHeight = 40;
+    let maxHeight = 120;
     let height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight));
 
-    let minWidth = 80;
-    let maxWidth = 150;
+    let minWidth = 40;
+    let maxWidth = 90;
     let width = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
 
     let notBallerina = new Component(x, 280, width, height, 'blue');
@@ -66,6 +98,13 @@ function throwStopTina () {
     gameArea.stopTinas = gameArea.stopTinas.filter(tina => tina.x > 0 + tina.width)
 }
 
+function checkPointQuestion () {
+    const crashed = gameArea.stopTinas.some(tina => ballerina.crashInto(tina))
+    if (crashed) {
+        gameArea.question = true
+    }
+}
+
 const ballerina = new Component(0, 280, 120, 120, 'pink');
 
 function cleanStage () {
@@ -76,7 +115,10 @@ function cleanStage () {
 
     gameArea.frames += 1
 
+    checkPointQuestion()
+    if (!gameArea.question) {
     requestAnimationFrame(cleanStage)
+    }
 }
 
 document.addEventListener('keydown', (e) => {
