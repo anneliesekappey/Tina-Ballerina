@@ -6,7 +6,7 @@ const gameArea = {
     stopTinas: [],
     question: false,
     start: function () {
-        this.canvas.width = 600;
+        this.canvas.width = 900;
         this.canvas.height = 600;
         this.context = this.canvas.getContext('2d');
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
@@ -72,23 +72,37 @@ class Component {
 }
 
 function stopTina () {
-    let x = gameArea.canvas.width
-    let minHeight = 40;
-    let maxHeight = 120;
+    let x = gameArea.canvas.width;
+    let y = gameArea.canvas.height;
+    let minHeight = 10;
+    let maxHeight = 60;
     let height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight));
+    let height1 = Math.floor(minHeight + Math.random() * (maxHeight - minHeight));
+    let height2 = Math.floor(minHeight + Math.random() * (maxHeight - minHeight));
 
-    let minWidth = 40;
-    let maxWidth = 90;
+    let minWidth = 20;
+    let maxWidth = 60;
     let width = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
+    let width1 = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
+    let width2 = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
 
-    let notBallerina = new Component(x, 280, width, height, 'blue');
+    let notBallerina = new Component(x, y/7.5, width, height, 'blue');
     gameArea.stopTinas.push(notBallerina)
+
+    let notBallerina1 = new Component(x, y/2.5, width1, height1, 'blue');
+    gameArea.stopTinas.push(notBallerina1)
+
+    let notBallerina2 = new Component(x, y/1.5, width2, height2, 'blue');
+    gameArea.stopTinas.push(notBallerina2)
 }
 
 function throwStopTina () {
     if (gameArea.frames % 180 === 0) {
-        stopTina()
-    }
+        stopTina();
+    } /*else if (gameArea.frames % 120 === 0) {
+        stopTina();
+    } else if (gameArea.frames % 80 === 0) {
+        stopTina();*/ 
 
     for (tina of gameArea.stopTinas) {
         tina.x -= 1
@@ -105,7 +119,7 @@ function checkPointQuestion () {
     }
 }
 
-const ballerina = new Component(0, 280, 120, 120, 'pink');
+const ballerina = new Component(0, 240, 80, 80, 'pink');
 
 function cleanStage () {
     gameArea.clear()
@@ -125,16 +139,16 @@ document.addEventListener('keydown', (e) => {
     const key = e.code;
     switch (key) {
         case 'ArrowUp':
-            ballerina.speedY -= 1;
+            gameArea.ballerina.speedY -= 1;
             break;
         case 'ArrowDown':
-            ballerina.speedY += 1;
+            gameArea.ballerina.speedY += 1;
             break;
         case 'ArrowRight':
-            ballerina.speedX += 1;
+            gameArea.ballerina.speedX += 1;
             break;
         case 'ArrowLeft':
-            ballerina.speedX -= 1
+            gameArea.ballerina.speedX -= 1
             break;
     }
 })
