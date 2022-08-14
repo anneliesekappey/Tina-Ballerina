@@ -4,47 +4,123 @@ const gameArea = {
   canvas: document.createElement("canvas"),
   frames: 0,
   stopTinas: [],
-  points: 0,
-  lives: 3,
+  points: 2,
   arrayQuestions: [
     {
       question: "Downstage is...",
-      correctAnswer: "closest to the audience",
-      wrongAnswer1: "to the right",
-      wrongAnswer2: "to the left",
-      wrongAnswer3: "away from the audience",
+      optionA: "closest to the audience",
+      optionB: "to the left",
+      optionC: "away from the audience",
       solution: function (question) {
-        return question === this.correctAnswer;
+        return question === this.optionA;
       },
     },
     {
       question: "Where was ballet invented?",
-      correctAnswer: "In Italy",
-      wrongAnswer1: "In Russia",
-      wrongAnswer2: "In France",
-      wrongAnswer3: "In Germany",
+      optionA: "In Russia",
+      optionB: "In Italy",
+      optionC: "In France",
       solution: function (question) {
-        return question === this.correctAnswer;
+        return question === this.optionB;
       },
     },
     {
       question: "Plié means...",
-      correctAnswer: "To bend",
-      wrongAnswer1: "To stretch",
-      wrongAnswer2: "To live",
-      wrongAnswer3: "To dance",
+      optionA: "to stretch",
+      optionB: "to dance",
+      optionC: "to bend",
       solution: function (question) {
-        return question === this.correctAnswer;
+        return question === this.optionC;
       },
     },
     {
       question: "A first arabesque is...",
-      correctAnswer: "Front arm same as supporting leg",
-      wrongAnswer1: "Front arm different from supporting leg",
-      wrongAnswer2: "Both arms in front",
-      wrongAnswer3: "A French piece of funiture",
+      optionA: "both arms in front",
+      optionB: "front arm same as supporting leg",
+      optionC: "a French piece of funiture",
       solution: function (question) {
-        return question === this.correctAnswer;
+        return question === this.optionB;
+      },
+    },
+    {
+      question: "What does 'en dehors' mean?",
+      optionA: "Outwards",
+      optionB: "Backwards",
+      optionC: "Inwards",
+      solution: function (question) {
+        return question === this.optionA;
+      },
+    },
+    {
+      question: "Dégagé means...",
+      optionA: "to stretch",
+      optionB: "to disengage",
+      optionC: "to smile",
+      solution: function (question) {
+        return question === this.optionB;
+      },
+    },
+    {
+      question: "When doing tendus at the barre...",
+      optionA: "we should cross in front and back",
+      optionB: "we should put our arms down",
+      optionC: "we should push down and pull up",
+      solution: function (question) {
+        return question === this.optionC;
+      },
+    },
+    {
+      question: "What is the 'en croix' pattern?",
+      optionA: "Front, side, back, side",
+      optionB: "Front, side, back",
+      optionC: "Dance, eat, repeat",
+      solution: function (question) {
+        return question === this.optionA;
+      },
+    },
+    {
+      question: "What is a 3/4 time signature called?",
+      optionA: "A ballad",
+      optionB: "A waltz",
+      optionC: "Pop music",
+      solution: function (question) {
+        return question === this.optionB;
+      },
+    },
+    {
+      question: "What is an adagio?",
+      optionA: "An old step we don't use anymore",
+      optionB: "A position of the arms",
+      optionC: "Slow movement phrases",
+      solution: function (question) {
+        return question === this.optionC;
+      },
+    },
+    {
+      question: "What is a pirouette en dedans?",
+      optionA: "When you turn towards the supporting leg",
+      optionB: "When you turn away from the supporting leg",
+      optionC: "When you turn to the right",
+      solution: function (question) {
+        return question === this.optionA;
+      },
+    },
+    {
+      question: "What is a coda in a story ballet?",
+      optionA: "When they dance to Led Zeppelin's music",
+      optionB: "Fast choreography that showcases virtuosity",
+      optionC: "When the whole group dances together",
+      solution: function (question) {
+        return question === this.optionB;
+      },
+    },
+    {
+      question: "What is the corps de ballet?",
+      optionA: "The body that dances ballet",
+      optionB: "The people who like watching ballet",
+      optionC: "The ensemble of a ballet company",
+      solution: function (question) {
+        return question === this.optionC;
       },
     },
   ],
@@ -63,6 +139,12 @@ const gameArea = {
     this.context.font = "14px arial";
     this.context.fillStyle = "purple";
     this.context.fillText(`Score: ${this.points}`, 350, 50);
+  },
+  lightsOut: function () {
+    if (this.points <= 0) {
+      console.log("Curtains down! Go back to the barre.");
+      gameArea.clear();
+    }
   },
 };
 
@@ -173,6 +255,7 @@ function checkPointQuestion() {
 const ballerina = new Component(0, 240, 80, 80, "pink");
 
 function cleanStage() {
+  gameArea.lightsOut();
   gameArea.clear();
   ballerina.moveAgain();
   ballerina.move();
@@ -186,14 +269,15 @@ function cleanStage() {
       arrayQuestions[Math.floor(Math.random() * arrayQuestions.length)];
     console.log(randomQuestion);
     let questionBanner = document.getElementById("question");
-    let content = `
+    let content = [
+      `
         <h2>${randomQuestion.question}</h2>
         <ul>
-            <li>${randomQuestion.correctAnswer}</li>
-            <li>${randomQuestion.wrongAnswer1}</li>
-            <li>${randomQuestion.wrongAnswer2}</li>
-            <li>${randomQuestion.wrongAnswer3}</li>
-        </ul>`;
+            <li>${randomQuestion.optionA}</li>
+            <li>${randomQuestion.optionB}</li>
+            <li>${randomQuestion.optionC}</li>
+        </ul>`,
+    ];
     questionBanner.innerHTML = content;
 
     let interactWithContent = questionBanner.getElementsByTagName("li");
@@ -211,10 +295,7 @@ function cleanStage() {
         if (randomQuestion.solution(event.target.innerText)) {
           gameArea.points += 1;
         } else {
-          gameArea.lives -= 1;
-          if ((gameArea.lives = 0)) {
-            console.log("Can't dance anymore!");
-          }
+          gameArea.points -= 1;
         }
         questionBanner.className = "not-visible";
         gameArea.question = false;
@@ -261,4 +342,8 @@ document.addEventListener("keyup", (e) => {
 });
 
 /* let bodyStyle = document.getElementsByTagName('body')
-bodyStyle.innerHTLM = margin = "50px 10px"; */
+bodyStyle.innerHTLM = margin = "50px 10px"; 
+
+if ((gameArea.points = 0)) {
+    console.log("Can't dance anymore!");
+  } */
