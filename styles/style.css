@@ -1,11 +1,31 @@
+html,
+body {
+    background-image: images/Stage.jpg;
+}
+
 #question {
+    font-family: 'Courier New', Courier, monospace;
+    font-style: normal;
+    font-size: 14px;
     position: absolute;
     top: 80px;
     right: 200px;
-    border: 3px solid gray;
+    border: 2px solid gray;
     width: 200px;
     background-color: lightgray;
     text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    border-radius: 18px;
+}
+
+h2 {
+    text-shadow: darkgray 8px -3px 2px;
+}
+
+ul {
+    list-style: lower-latin;
+    text-align: left;
 }
 
 .not-visible {
