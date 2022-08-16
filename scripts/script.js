@@ -1,5 +1,3 @@
-//console.log('script is connected');//
-
 const gameArea = {
   canvas: document.createElement("canvas"),
   frames: 0,
@@ -136,15 +134,14 @@ const gameArea = {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },
   score: function () {
-    this.context.font = "14px arial";
-    this.context.fillStyle = "purple";
-    this.context.fillText(`Score: ${this.points}`, 350, 50);
+    this.context.font = "24px arial";
+    this.context.fillStyle = "white";
+    this.context.fillText(`Score: ${this.points}`, 30, 50);
   },
   lightsOut: function () {
-    if (this.points <= 0) {
-      console.log("Curtains down! Go back to the barre.");
-      gameArea.clear();
-    }
+    this.context.font = "30px arial";
+    this.context.fillStyle = "darkgrey";
+    this.context.fillText(`Curtains down! Go back to the barre!`, 120, 300);
   },
 };
 
@@ -252,17 +249,41 @@ function checkPointQuestion() {
   }
 }
 
+/*const tina = src="images/Tina.png";
+let draw(x,y) => {
+    ctx.clearRect(0, 0, gameArea.canvas.width, gameArea.canvas.height)
+    ctx.drawImage(tina, x, y, 80, 80)
+}*/
+
 const ballerina = new Component(0, 240, 80, 80, "pink");
 
-function cleanStage() {
-  gameArea.lightsOut();
-  gameArea.clear();
-  ballerina.moveAgain();
-  ballerina.move();
-  throwStopTina();
-  gameArea.score();
+const tinaImg = new Image();
+tinaImg.src = "./images/Tina.png";
+let tinaX = 0;
+let tinaY = 240;
+function draw(x, y) {
+  ctx.drawImage(tinaImg, tinaX, tinaY, 80, 80);
+}
 
-  gameArea.frames += 1;
+//drawImage(tina, x, y, 80, 80);//
+
+function cleanStage() {
+  const startBtn = document.getElementsByClassName("start-btn");
+  startBtn.onclick = () => {
+    gameArea.start();
+  };
+  if (gameArea.points <= 0) {
+    gameArea.clear();
+    gameArea.lightsOut();
+  } else {
+    gameArea.clear();
+    ballerina.moveAgain();
+    ballerina.move();
+    throwStopTina();
+    gameArea.score();
+
+    gameArea.frames += 1;
+  }
 
   function answerRandomQuestion(arrayQuestions) {
     let randomQuestion =
@@ -340,6 +361,11 @@ document.addEventListener("keyup", (e) => {
   ballerina.speedX = 0;
   ballerina.speedY = 0;
 });
+
+/*const startBtn = document.getElementsByClassName("start-btn");
+startBtn.onclick = () => {
+  gameArea.start();
+};*/
 
 /* let bodyStyle = document.getElementsByTagName('body')
 bodyStyle.innerHTLM = margin = "50px 10px"; 

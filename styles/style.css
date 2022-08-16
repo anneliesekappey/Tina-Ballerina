@@ -1,6 +1,6 @@
 html,
 body {
-    background-image: images/Stage.jpg;
+    background-image: url('../images/Stage.jpg');
 }
 
 #question {
@@ -19,6 +19,14 @@ body {
     border-radius: 18px;
 }
 
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 350;
+    text-align: center;
+}
+
 h2 {
     text-shadow: darkgray 8px -3px 2px;
 }
@@ -27,6 +35,20 @@ ul {
     list-style: lower-latin;
     text-align: left;
 }
+
+start-btn {
+    background-color: gray;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2em;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px
+  }
 
 .not-visible {
     visibility: hidden;
