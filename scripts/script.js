@@ -146,20 +146,20 @@ const gameArea = {
 };
 
 class Component {
-  constructor(x, y, width, height, color) {
+  constructor(x, y, width, height, imageSrc) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.color = color;
     this.speedX = 0;
     this.speedY = 0;
+    this.image = new Image();
+    this.image.src = imageSrc;
   }
 
   move() {
     const ctx = gameArea.context;
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
   moveAgain() {
@@ -194,6 +194,7 @@ class Component {
 }
 
 function stopTina() {
+  let notTina = "../images/NotTina.jpg";
   let x = gameArea.canvas.width;
   let y = gameArea.canvas.height;
   let minHeight = 10;
@@ -208,13 +209,13 @@ function stopTina() {
   let width1 = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
   let width2 = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
 
-  let notBallerina = new Component(x, y / 7.5, width, height, "blue");
+  let notBallerina = new Component(x, y / 7.5, width, height, notTina);
   gameArea.stopTinas.push(notBallerina);
 
-  let notBallerina1 = new Component(x, y / 2.5, width1, height1, "blue");
+  let notBallerina1 = new Component(x, y / 2.5, width1, height1, notTina);
   gameArea.stopTinas.push(notBallerina1);
 
-  let notBallerina2 = new Component(x, y / 1.5, width2, height2, "blue");
+  let notBallerina2 = new Component(x, y / 1.5, width2, height2, notTina);
   gameArea.stopTinas.push(notBallerina2);
 }
 
@@ -255,23 +256,18 @@ let draw(x,y) => {
     ctx.drawImage(tina, x, y, 80, 80)
 }*/
 
-const ballerina = new Component(0, 240, 80, 80, "pink");
+const tinaImg = "../images/Tina.png";
+const ballerina = new Component(0, 240, 80, 80, tinaImg);
 
-const tinaImg = new Image();
-tinaImg.src = "./images/Tina.png";
-let tinaX = 0;
+/*let tinaX = 0;
 let tinaY = 240;
 function draw(x, y) {
   ctx.drawImage(tinaImg, tinaX, tinaY, 80, 80);
-}
+}*/
 
 //drawImage(tina, x, y, 80, 80);//
 
 function cleanStage() {
-  const startBtn = document.getElementsByClassName("start-btn");
-  startBtn.onclick = () => {
-    gameArea.start();
-  };
   if (gameArea.points <= 0) {
     gameArea.clear();
     gameArea.lightsOut();
@@ -362,14 +358,9 @@ document.addEventListener("keyup", (e) => {
   ballerina.speedY = 0;
 });
 
-/*const startBtn = document.getElementsByClassName("start-btn");
-startBtn.onclick = () => {
+document.querySelector(".start-btn").onclick = () => {
+  console.log("start");
   gameArea.start();
-};*/
-
+};
 /* let bodyStyle = document.getElementsByTagName('body')
-bodyStyle.innerHTLM = margin = "50px 10px"; 
-
-if ((gameArea.points = 0)) {
-    console.log("Can't dance anymore!");
-  } */
+bodyStyle.innerHTLM = margin = "50px 10px";*/
