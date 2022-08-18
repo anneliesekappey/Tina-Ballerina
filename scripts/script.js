@@ -121,6 +121,33 @@ const gameArea = {
         return question === this.optionC;
       },
     },
+    {
+      question: "What's the translation of 'pas de cheval'?",
+      optionA: "Step of the horse",
+      optionB: "Step of the eagle",
+      optionC: "Step of the pirate",
+      solution: function (question) {
+        return question === this.optionA;
+      },
+    },
+    {
+      question: "What company was founded by George Balanchine?",
+      optionA: "American Ballet Theatre",
+      optionB: "New York City Ballet",
+      optionC: "The Kirov",
+      solution: function (question) {
+        return question === this.optionB;
+      },
+    },
+    {
+      question: "What is en face?",
+      optionA: "A lotion for your face",
+      optionB: "When you face the barre",
+      optionC: "A position of the body in center",
+      solution: function (question) {
+        return question === this.optionC;
+      },
+    },
   ],
   question: false,
   start: function () {
