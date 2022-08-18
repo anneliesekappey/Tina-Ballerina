@@ -197,36 +197,32 @@ function stopTina() {
   let notTina = "../images/NotTina.jpg";
   let x = gameArea.canvas.width;
   let y = gameArea.canvas.height;
-  let minHeight = 10;
-  let maxHeight = 60;
+  let minHeight = 40;
+  let maxHeight = 80;
   let height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight));
   let height1 = Math.floor(minHeight + Math.random() * (maxHeight - minHeight));
   let height2 = Math.floor(minHeight + Math.random() * (maxHeight - minHeight));
 
-  let minWidth = 20;
-  let maxWidth = 60;
+  let minWidth = 50;
+  let maxWidth = 110;
   let width = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
   let width1 = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
   let width2 = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
 
-  let notBallerina = new Component(x, y / 7.5, width, height, notTina);
+  let notBallerina = new Component(x, y / 7.3, width, height, notTina);
   gameArea.stopTinas.push(notBallerina);
 
-  let notBallerina1 = new Component(x, y / 2.5, width1, height1, notTina);
+  let notBallerina1 = new Component(x, y / 2.3, width1, height1, notTina);
   gameArea.stopTinas.push(notBallerina1);
 
-  let notBallerina2 = new Component(x, y / 1.5, width2, height2, notTina);
+  let notBallerina2 = new Component(x, y / 1.4, width2, height2, notTina);
   gameArea.stopTinas.push(notBallerina2);
 }
 
 function throwStopTina() {
   if (gameArea.frames % 180 === 0) {
     stopTina();
-  } /*else if (gameArea.frames % 120 === 0) {
-        stopTina();
-    } else if (gameArea.frames % 80 === 0) {
-        stopTina();*/
-
+  }
   for (tina of gameArea.stopTinas) {
     tina.x -= 1;
     tina.move();
@@ -250,22 +246,8 @@ function checkPointQuestion() {
   }
 }
 
-/*const tina = src="images/Tina.png";
-let draw(x,y) => {
-    ctx.clearRect(0, 0, gameArea.canvas.width, gameArea.canvas.height)
-    ctx.drawImage(tina, x, y, 80, 80)
-}*/
-
 const tinaImg = "../images/Tina.png";
-const ballerina = new Component(0, 240, 80, 80, tinaImg);
-
-/*let tinaX = 0;
-let tinaY = 240;
-function draw(x, y) {
-  ctx.drawImage(tinaImg, tinaX, tinaY, 80, 80);
-}*/
-
-//drawImage(tina, x, y, 80, 80);//
+const ballerina = new Component(0, 240, 100, 100, tinaImg);
 
 function cleanStage() {
   if (gameArea.points <= 0) {
@@ -298,14 +280,6 @@ function cleanStage() {
     questionBanner.innerHTML = content;
 
     let interactWithContent = questionBanner.getElementsByTagName("li");
-    /* for (i = 0; i < interactWithContent.length; i +=1) {
-        console.log(interactWithContent[i])
-        interactWithContent[i].onclick = () => {
-        questionBanner.className = 'not-visible'
-        gameArea.question = false
-        cleanStage()
-       } 
-    } */
 
     for (i = 0; i < interactWithContent.length; i += 1) {
       interactWithContent[i].onclick = (event) => {
@@ -353,6 +327,20 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+document.addEventListener(
+  "keydown",
+  (e) => {
+    if (
+      ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
+        e.code
+      ) > -1
+    ) {
+      e.preventDefault();
+    }
+  },
+  false
+);
+
 document.addEventListener("keyup", (e) => {
   ballerina.speedX = 0;
   ballerina.speedY = 0;
@@ -361,6 +349,5 @@ document.addEventListener("keyup", (e) => {
 document.querySelector(".start-btn").onclick = () => {
   console.log("start");
   gameArea.start();
+  //window.open(URL, gameArea.start());//
 };
-/* let bodyStyle = document.getElementsByTagName('body')
-bodyStyle.innerHTLM = margin = "50px 10px";*/
