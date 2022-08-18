@@ -140,12 +140,75 @@ const gameArea = {
       },
     },
     {
-      question: "What is en face?",
+      question: "What is 'en face'?",
       optionA: "A lotion for your face",
       optionB: "When you face the barre",
       optionC: "A position of the body in center",
       solution: function (question) {
         return question === this.optionC;
+      },
+    },
+    {
+      question: "Croisé means...",
+      optionA: "crossed",
+      optionB: "open",
+      optionC: "cheese",
+      solution: function (question) {
+        return question === this.optionA;
+      },
+    },
+    {
+      question: "A rond de jambe en dehors moves from...",
+      optionA: "back to front",
+      optionB: "front to back",
+      optionC: "New York to Los Angeles",
+      solution: function (question) {
+        return question === this.optionB;
+      },
+    },
+    {
+      question: "A rond de jambe en dedans moves from...",
+      optionA: "front to back",
+      optionB: "side to side",
+      optionC: "back to front",
+      solution: function (question) {
+        return question === this.optionC;
+      },
+    },
+    {
+      question: "Alongé means to...",
+      optionA: "elongate",
+      optionB: "open",
+      optionC: "cheese",
+      solution: function (question) {
+        return question === this.optionA;
+      },
+    },
+    {
+      question: "A third arabesque is...",
+      optionA: "the best arabesque",
+      optionB: "both arms in front, upstage arm slightly raised",
+      optionC: "both arms down, downstage arm towards the back",
+      solution: function (question) {
+        return question === this.optionB;
+      },
+    },
+    {
+      question: "A battement frappé can be... ",
+      optionA: "exhausting",
+      optionB: "delicious",
+      optionC: "in relevé",
+      solution: function (question) {
+        return question === this.optionC;
+      },
+    },
+    {
+      question: "",
+      optionA: "elongate",
+      optionB: "open",
+      optionC: "cheese",
+      solution: function (question) {
+        return question === this.optionA;
       },
     },
   ],
@@ -221,7 +284,7 @@ class Component {
 }
 
 function stopTina() {
-  let notTina = "../images/NotTina.jpg";
+  let notTina = "./images/NotTina.jpg";
   let x = gameArea.canvas.width;
   let y = gameArea.canvas.height;
   let minHeight = 40;
@@ -273,8 +336,8 @@ function checkPointQuestion() {
   }
 }
 
-const tinaImg = "../images/Tina.png";
-const ballerina = new Component(0, 240, 100, 100, tinaImg);
+const tinaImg = "./images/Tina.png";
+const ballerina = new Component(0, 240, 85, 85, tinaImg);
 
 function cleanStage() {
   if (gameArea.points <= 0) {
@@ -376,5 +439,5 @@ document.addEventListener("keyup", (e) => {
 document.querySelector(".start-btn").onclick = () => {
   console.log("start");
   gameArea.start();
-  //window.open(URL, gameArea.start());//
+  //window.open(URL, g);//
 };
