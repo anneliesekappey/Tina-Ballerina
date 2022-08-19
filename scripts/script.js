@@ -231,7 +231,11 @@ const gameArea = {
   lightsOut: function () {
     this.context.font = "30px arial";
     this.context.fillStyle = "darkgrey";
-    this.context.fillText(`Curtains down! Go back to the barre!`, 120, 300);
+    this.context.fillText(
+      `Curtains down! Let's get back to the barre!`,
+      120,
+      300
+    );
   },
 };
 
@@ -439,5 +443,3 @@ document.addEventListener("keyup", (e) => {
 window.onload = () => {
   gameArea.start();
 };
-
-//document.getElementById("game-stage")//
