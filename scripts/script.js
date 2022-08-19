@@ -197,16 +197,16 @@ const gameArea = {
       question: "A battement frappé can be... ",
       optionA: "exhausting",
       optionB: "delicious",
-      optionC: "in relevé",
+      optionC: "en relevé",
       solution: function (question) {
         return question === this.optionC;
       },
     },
     {
-      question: "",
-      optionA: "elongate",
-      optionB: "open",
-      optionC: "cheese",
+      question: "RAD means...",
+      optionA: "Royal Academy of Dance",
+      optionB: "cool",
+      optionC: "Rond Alongé Dehors",
       solution: function (question) {
         return question === this.optionA;
       },
@@ -437,7 +437,10 @@ document.addEventListener("keyup", (e) => {
 });
 
 document.querySelector(".start-btn").onclick = () => {
+  let stage = document.getElementById("game-stage");
+  location.href = stage;
   console.log("start");
   gameArea.start();
-  //window.open(URL, g);//
 };
+
+//document.getElementById("#game-stage")//
