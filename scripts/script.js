@@ -436,11 +436,8 @@ document.addEventListener("keyup", (e) => {
   ballerina.speedY = 0;
 });
 
-document.querySelector(".start-btn").onclick = () => {
-  let stage = document.getElementById("game-stage");
-  location.href = stage;
-  console.log("start");
+window.onload = () => {
   gameArea.start();
 };
 
-//document.getElementById("#game-stage")//
+//document.getElementById("game-stage")//
